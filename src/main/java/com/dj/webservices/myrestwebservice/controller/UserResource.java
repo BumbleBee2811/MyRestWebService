@@ -38,4 +38,13 @@ public class UserResource {
                 .path("/{id}").buildAndExpand(savedUser.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping("/users/{id}")
+    public User deleteUser(@PathVariable int id) {
+        User deletedUser = userDAO.removeById(id);
+        if (null == deletedUser) {
+            throw new UserNotFoundException("User having id = "+id+" was not found. Please verify the id you have entered.");
+        }
+        return deletedUser;
+    }
 }

@@ -39,4 +39,14 @@ public class UserDAO {
         users.add(user);
         return user;
     }
+
+    public User removeById(int id) {
+        for (User user : users) {
+            if (id == user.getId()) {
+                users.remove(user);
+                return user;
+            }
+        }
+        return null;
+    }
 }
